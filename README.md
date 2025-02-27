@@ -111,4 +111,4 @@ npm run report
 5. Open a Pull Request
 
 ## Author
-Your Name - [GitHub Profile](https://github.com/yourusername)
+Mohammed Lukmanudhin - [GitHub Profile](https://github.com/redJavaMan)
