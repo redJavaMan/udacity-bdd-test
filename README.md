@@ -1,114 +1,123 @@
-# Playwright-Cucumber TypeScript Testing Framework
+# Udacity UI BDD Test Framework
 
 ## Overview
-This repository contains an automated UI and API testing framework for Udacity Catalog using Playwright, Cucumber, TypeScript, and Allure reporting. The framework follows BDD principles and implements a robust Page Object Model architecture.
-
-## Project Repository
-[udacity-bdd-test](https://github.com/yourusername/udacity-bdd-test.git)
+This repository contains an automated UI and API testing framework for Udacity's catalog website, built using Playwright, Cucumber BDD, TypeScript, and Page Object Model design pattern. The framework enables end-to-end testing of search functionality, validating both UI components and API responses.
 
 ## Tech Stack
-- TypeScript
-- Playwright
-- Cucumber
-- Allure Reporting Framework
-- Node.js
+- **TypeScript**: For type-safe code
+- **Playwright**: For browser automation
+- **Playwright-BDD/Cucumber**: For behavior-driven development
+- **Page Object Model**: For maintainable test architecture
 
 ## Prerequisites
 - Node.js 14 or higher
 - npm 6.x or higher
-- Chrome/Firefox/Edge browser
-- Allure command line tool (for report generation)
+- Chrome browser (Firefox and WebKit configurations are available but commented out)
 
 ## Project Structure
 ```
-playwright-cucumber-ts/
-├── src/
-│   ├── pages/         # Page Object files
-│   ├── api/           # API helper classes
-│   ├── features/      # Feature files and support
-│   ├── steps/         # Step definitions
-│   └── utils/         # Utilities and helpers
-├── cucumber.js        # Cucumber configuration
-├── playwright.config.ts  # Playwright configuration
-└── package.json       # Project dependencies
+├── .features-gen/            # Generated test files from feature files
+├── fixtures/                 # Custom Playwright fixtures
+├── pages/                    # Page Object files
+│   ├── header.ts             # Header component with search functionality
+│   └── homePage.ts           # Home page interactions
+├── tests/
+│   ├── feature/              # Feature files (Gherkin syntax)
+│   │   └── searchTest.feature
+│   └── stepDefinitions/      # Step definition files
+│       └── search.steps.ts
+├── utilities/                # Helper functions and API clients
+│   ├── searchApi.ts          # API client for search functionality
+│   └── utils.ts              # Common utilities and validation functions
+├── playwright.config.ts      # Playwright and BDD configuration
+└── package.json              # Project dependencies
 ```
 
-## Installation & Setup
+## Features
+- **BDD Approach**: Using Gherkin syntax for human-readable test specifications
+- **Cross-browser Testing**: Configured for Chromium with options for Firefox and WebKit
+- **API Testing**: Validates UI results against API responses
+- **Page Object Model**: Organized page elements and actions for better maintenance
+- **Parallel Execution**: Configured to run tests in parallel for efficiency
+
+## Test Scenarios
+The framework currently tests the following scenarios:
+
+### Search Functionality
+- Validates that search results in the UI match expected data
+- Compares UI search results with API responses
+- Tests filtering functionality using the Skills dropdown
+- Handles negative scenarios with no search results
+
+## Installation
+
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/yourusername/udacity-ui-bdd-test.git
 
 # Navigate to project directory
-cd udacity-bdd-test
+cd udacity-ui-bdd-test
 
 # Install dependencies
 npm install
 ```
 
-## Test Configuration
-The framework is configured through `playwright.config.ts` and `cucumber.js` files, enabling cross-browser testing, screenshot capture, and parallel execution.
-
-## Test Scenarios
-
-### Search Functionality Validation
-- Validates UI search results against expected data
-- Compares UI results with API data for consistency
-- Verifies skill filtering functionality
-- Tests pagination and sorting features
-
-### Negative Testing
-- Handles invalid search terms gracefully
-- Verifies appropriate error messages
-- Tests boundary conditions and edge cases
-
 ## Running Tests
+
 ```bash
 # Run all tests
-npm test
+npx playwright-bdd test
 
-# Run specific features
-npm test -- --tags "@search"
+# Run with specific browser
+npx playwright-bdd test --project=chromium
 
-# Run tests with specific browser
-npm test -- --browser=firefox
-
-# Generate Allure report
-npm run report
+# Generate and view HTML report
+npx playwright show-report
 ```
 
-## Parallel Execution
-The test suite is configured to run tests in parallel, maximizing execution efficiency. This is configured in the cucumber.js file.
+## Adding New Tests
 
-## Reporting
-The project uses Allure for comprehensive test reporting. To view the reports:
+1. Create a new feature file in the `tests/feature/` directory
+2. Implement the step definitions in `tests/stepDefinitions/`
+3. Create page objects for any new pages in the `pages/` directory
+4. Run the tests using the commands above
 
-1. Run tests with Allure:
-```bash
-npm test
+## Environment Configuration
+
+The base URL for tests is configured in the `.env` file:
+
+```
+BASE_URL="https://www.udacity.com/catalog"
 ```
 
-2. Generate and open the report:
-```bash
-npm run report
-```
-
-## Key Features
-- Page Object Model implementation for maintainable test code
-- API validation integrated with UI tests for complete coverage
-- Cucumber for BDD approach and readable specifications
-- TypeScript for type safety and improved code quality
-- Allure reporting for detailed test results
-- Support for parallel test execution
-- Cross-browser testing support
-- Screenshot capture on failure
-- Custom utilities for common operations
+You can modify this to point to different environments if needed.
 
 ## Contributing
+
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
+## Code Style
+
+This project uses ESLint and Prettier for code formatting:
+
+```bash
+# Check code style
+npx eslint .
+
+# Format code
+npx prettier --write .
+```
+
+## Future Enhancements
+
+- Add more test scenarios for other functionalities
+- Implement visual regression testing
+- Add reporting integration (Allure, etc.)
+- Implement CI/CD pipeline integration
+
 ## Author
-Mohammed Lukmanudhin - [GitHub Profile](https://github.com/redJavaMan)
+Mohammed Lukmanudin M - [GitHub Profile](https://github.com/redJavaMan)
